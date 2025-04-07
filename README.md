@@ -3,7 +3,7 @@
 ```ssh
 git clone git@github.com:dean26/jsystem.git oop
 cd oop
-cp .env .env.example
+cp .env.example .env
 composer install
 ```
 
