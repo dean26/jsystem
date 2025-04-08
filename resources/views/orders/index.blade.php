@@ -15,6 +15,7 @@
                 <th>Product</th>
                 <th>Price</th>
                 <th>Quantity</th>
+                <th>Payments</ht>
                 <th>Akcja</th>
             </tr>
         </thead>
@@ -25,6 +26,11 @@
                     <td>{{ $order->product_name }}</td>
                     <td>{{ $order->quantity }}</td>
                     <td>{{ $order->price }}</td>
+                    <td>
+                        @foreach ($order->payments as $payment)
+                            #{{ $payment->id }} - {{ $payment->status }}<br/>
+                        @endforeach
+                    </td>
                     <td>
                         <a href="{{ route('orders.edit', $order) }}">Edytuj</a>
                         <form action="{{ route('orders.destroy', $order) }}" method="POST" style="display:inline;">
