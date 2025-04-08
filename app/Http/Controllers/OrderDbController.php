@@ -9,7 +9,7 @@ class OrderDbController extends Controller
 {
     public function index()
     {
-        $orders = DB::table('orders')->get();
+        $orders = DB::table('orders')->paginate(5);
         return view('orders.index', ['orders' => $orders]);
     }
 
