@@ -4,9 +4,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\WebController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\EngineController;
 use App\Http\Controllers\OrderDbController;
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,7 +33,7 @@ Route::get('/cars/lambo', [CarController::class, 'lambo']);
 Route::get('/order', [WebController::class, 'order']);
 Route::get('/payment', [WebController::class, 'payment']);
 
-Route::prefix('orders')->name('orders.')->controller(OrderController::class)
+Route::middleware('auth')->prefix('orders')->name('orders.')->controller(OrderController::class)
 ->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('show/{order}', 'show')->name('show');
