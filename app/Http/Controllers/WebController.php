@@ -33,4 +33,9 @@ class WebController extends Controller
 
         echo $paymentProcessor->paymentStrategy->pay(22);
     }
+
+    public function test_xss(Request $request){
+        $name = ($request->get('name'));
+        return view('xss', ['name' => $name]);
+    }
 }

@@ -24,6 +24,11 @@
                     <td>{{ $order->price }}</td>
                     <td>
                         <a href="{{ route('orders-db.show', ['id' => $order->id]) }}">Szczególy</a>
+                        <form action="{{ route('orders-db.destroy', ['id' => $order->id]) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button>Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

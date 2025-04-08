@@ -44,8 +44,10 @@ class OrderDbController extends Controller
         return view('orders.index');
     }
 
-    public function destroy()
+    public function destroy(int $id)
     {
-        return view('orders.index');
+        DB::table('orders')->where('id', $id)->delete();
+
+        return redirect()->route('orders-db.index');
     }
 }

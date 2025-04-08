@@ -43,3 +43,5 @@ Route::prefix('engines')->name('engines.')->controller(EngineController::class)
 ->group(function () {
     Route::get('/', 'index')->name('index');
 });
+
+Route::get('/test-xss', [WebController::class, 'test_xss']);
