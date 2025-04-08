@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderDbController extends Controller
 {
     public function index()
     {
-        return view('orders.index');
+        $orders = DB::table('orders')->get();
+        return view('orders.index', ['orders' => $orders]);
     }
 
     public function create()
