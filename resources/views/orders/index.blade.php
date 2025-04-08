@@ -3,5 +3,5 @@
 @section('title', 'Lista zamowien')
 
 @section('content')
-    <h1>Orders</h1>
+    <h1>Orders - list</h1>
 @endsection
