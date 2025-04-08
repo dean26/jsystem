@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\EngineController;
 use App\Http\Controllers\OrderDbController;
 
 Route::get('/', function () {
@@ -36,4 +37,9 @@ Route::prefix('orders-db')->name('orders-db.')->controller(OrderDbController::cl
     Route::get('{id}/edit', 'edit')->name('edit');
     Route::put('{id}', 'update')->name('update');
     Route::delete('{id}', 'destroy')->name('destroy');
+});
+
+Route::prefix('engines')->name('engines.')->controller(EngineController::class)
+->group(function () {
+    Route::get('/', 'index')->name('index');
 });
