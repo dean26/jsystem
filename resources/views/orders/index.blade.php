@@ -5,6 +5,9 @@
 @section('content')
     <h1>Orders - list</h1>
 
+    <p>
+        <a href="{{ route('orders.create') }}">Dodaj zamowienie</a>
+    </p>
     <table>
         <thead>
             <tr>
@@ -23,8 +26,8 @@
                     <td>{{ $order->quantity }}</td>
                     <td>{{ $order->price }}</td>
                     <td>
-                        <a href="{{ route('orders-db.show', ['id' => $order->id]) }}">Szczególy</a>
-                        <form action="{{ route('orders-db.destroy', ['id' => $order->id]) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('orders.edit', $order) }}">Edytuj</a>
+                        <form action="{{ route('orders.destroy', $order) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button>Delete</button>

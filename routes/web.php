@@ -28,6 +28,17 @@ Route::get('/cars/lambo', [CarController::class, 'lambo']);
 Route::get('/order', [WebController::class, 'order']);
 Route::get('/payment', [WebController::class, 'payment']);
 
+Route::prefix('orders')->name('orders.')->controller(OrderController::class)
+->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('show/{order}', 'show')->name('show');
+    Route::get('create', 'create')->name('create');
+    Route::post('/', 'store')->name('store');
+    Route::get('{order}/edit', 'edit')->name('edit');
+    Route::post('{order}', 'update')->name('update');
+    Route::delete('{order}', 'destroy')->name('destroy');
+});
+
 Route::prefix('orders-db')->name('orders-db.')->controller(OrderDbController::class)
 ->group(function () {
     Route::get('/', 'index')->name('index');
@@ -45,3 +56,4 @@ Route::prefix('engines')->name('engines.')->controller(EngineController::class)
 });
 
 Route::get('/test-xss', [WebController::class, 'test_xss']);
+
