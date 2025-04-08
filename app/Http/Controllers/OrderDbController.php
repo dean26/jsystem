@@ -13,6 +13,17 @@ class OrderDbController extends Controller
         return view('orders.index', ['orders' => $orders]);
     }
 
+    public function show(int $id)
+    {
+        $order = DB::table('orders')->where('id', $id)->first();
+
+        if(empty($order)){
+            abort(404);
+        }        
+
+        return view('orders.show', ['order' => $order]);
+    }
+
     public function create()
     {
         return view('orders.index');

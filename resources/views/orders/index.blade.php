@@ -22,7 +22,9 @@
                     <td>{{ $order->product_name }}</td>
                     <td>{{ $order->quantity }}</td>
                     <td>{{ $order->price }}</td>
-                    <td></td>
+                    <td>
+                        <a href="{{ route('orders-db.show', ['id' => $order->id]) }}">Szczególy</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

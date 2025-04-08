@@ -30,6 +30,7 @@ Route::get('/payment', [WebController::class, 'payment']);
 Route::prefix('orders-db')->name('orders-db.')->controller(OrderDbController::class)
 ->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::get('show/{id}', 'show')->name('show');
     Route::get('create', 'create')->name('create');
     Route::post('/', 'store')->name('store');
     Route::get('{id}/edit', 'edit')->name('edit');
