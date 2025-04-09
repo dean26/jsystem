@@ -19,23 +19,9 @@ class OrderController extends Controller
         return OrderResource::collection($orders);
     }
 
-    public function store(OrderStoreRequest $request)
+    public function store(OrderStoreRequest $request, OrderStoreService $orderStoreService)
     {
-        $data = $request->validated();
-
-        $path = null;
-        if($request->file('file')){
-            $path = $request->file('file')->store('orders', 'local');
-        }
-        
-        $order = Order::create([
-            'product_name' => $data['product_name'],
-            'quantity' => $data['quantity'],
-            'price' => $data['price'],
-            'file' => $path ?? null,
-        ]);
-
-        return new OrderResource($order);
+        return new OrderResource($orderStoreService->createStore($request->validated(), $request));
     }
 
     public function update(OrderUpdateRequest $request, Order $order)
