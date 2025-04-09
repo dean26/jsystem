@@ -6,26 +6,22 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
+use App\Http\Requests\OrderStoreRequest;
+use App\Http\Requests\OrderUpdateRequest;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::query()->with('payments')->paginate(15);
+        //ds()->queriesOn('checking a user query');
+        $orders = Order::query()->with('payments')->orderBy('created_at', 'desc')->paginate(15);
         
         return OrderResource::collection($orders);
     }
 
-    public function store(Request $request)
+    public function store(OrderStoreRequest $request)
     {
-        $request->validate([
-            'product_name' => 'required|string|max:255',
-            'quantity' => 'required|integer|min:1',
-            'price' => 'required|numeric|min:0',
-            'file'  => 'file|max:10240',
-        ]);
-
-        $data = $request->all();
+        $data = $request->validated();
 
         $path = null;
         if($request->file('file')){
@@ -42,15 +38,9 @@ class OrderController extends Controller
         return new OrderResource($order);
     }
 
-    public function update(Request $request, Order $order)
+    public function update(OrderUpdateRequest $request, Order $order)
     {
-        $request->validate([
-            'product_name' => 'required|string|max:255',
-            'quantity' => 'required|integer|min:1',
-            'price' => 'required|numeric|min:0',
-        ]);
-
-        $order->update($request->all());
+        $order->update($request->validated());
 
         return new OrderResource($order);
     }
