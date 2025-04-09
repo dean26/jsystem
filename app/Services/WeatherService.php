@@ -10,7 +10,6 @@ class WeatherService
     public function getWeatherForCity(string $city): array
     {
         $key = config('weatherapi.key');
-        ds($key);
 
         $response = Http::get(
             "http://api.weatherapi.com/v1/current.json",
