@@ -30,7 +30,7 @@ class OrderController extends Controller
 
         $data = $request->all();
 
-        $path = $request->file('file')->store('orders', 'public');
+        $path = $request->file('file')->store('orders', 'local');
 
         Order::create([
             'product_name' => $data['product_name'],
@@ -71,6 +71,8 @@ class OrderController extends Controller
         if(!$order->file || !Storage::disk('public')->exists($order->file)){
             abort(404);
         }
+
+        
 
         return Storage::disk('public')->download($order->file);
     }

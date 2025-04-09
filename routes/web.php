@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\EngineController;
 use App\Http\Controllers\OrderDbController;
+use App\Http\Controllers\WeatherController;
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -28,6 +29,7 @@ Route::get('/test', function(Request $request) {
     'name' => $name]);
 });
 
+Route::get('/weather', [WeatherController::class, 'index']);
 Route::get('/cars/start', [CarController::class, 'start']);
 Route::get('/cars/lambo', [CarController::class, 'lambo']);
 Route::get('/order', [WebController::class, 'order']);

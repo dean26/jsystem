@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\OrderController;
 
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-Route::middleware('auth:sanctum')->prefix('api-orders')->name('orders.')->controller(OrderController::class)
+Route::middleware(['auth:sanctum', 'throttle:60,1'])->prefix('api-orders')->name('orders.')->controller(OrderController::class)
 ->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('/', 'store')->name('store');
