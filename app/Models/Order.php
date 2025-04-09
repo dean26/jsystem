@@ -11,6 +11,7 @@ class Order extends Model
         'product_name',
         'quantity',
         'price',
+        'file',
     ];
 
     public function payments(): HasMany
