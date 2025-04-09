@@ -24,9 +24,19 @@ class OrderController extends Controller
             'product_name' => 'required|string|max:255',
             'quantity' => 'required|integer|min:1',
             'price' => 'required|numeric|min:0',
+            'file'  => 'file|max:10240',
         ]);
 
-        Order::create($request->all());
+        $data = $request->all();
+
+        $path = $request->file('file')->store('orders', 'public');
+
+        Order::create([
+            'product_name' => $data['product_name'],
+            'quantity' => $data['quantity'],
+            'price' => $data['price'],
+            'file' => $path ?? null,
+        ]);
 
         return redirect()->route('orders.index')->with('success', 'Order created successfully.');
     }

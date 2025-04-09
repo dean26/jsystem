@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form action="{{ route('orders.store') }}" method="POST">
+    <form action="{{ route('orders.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div>
             <label for="product_name">Product Name:</label>
@@ -28,6 +28,10 @@
         <div>
             <label for="price">Price:</label>
             <input type="number" name="price" value="{{ old('price') }}" step="0.01" min="0" required>
+        </div>
+        <div>
+            <label for="file">File:</label>
+            <input type="file" name="file">
         </div>
         <button type="submit">Create</button>
     </form>
