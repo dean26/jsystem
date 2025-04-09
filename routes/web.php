@@ -42,6 +42,7 @@ Route::middleware('auth')->prefix('orders')->name('orders.')->controller(OrderCo
     Route::get('{order}/edit', 'edit')->name('edit');
     Route::post('{order}', 'update')->name('update');
     Route::delete('{order}', 'destroy')->name('destroy');
+    Route::get('/download/{order}', 'download')->name('download');
 });
 
 Route::prefix('orders-db')->name('orders-db.')->controller(OrderDbController::class)

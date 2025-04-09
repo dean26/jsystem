@@ -38,6 +38,9 @@
                             @method('DELETE')
                             <button>Delete</button>
                         </form>
+                        @if($order->file)
+                            <a href="{{ route('orders.download', $order) }}">Pobierz</a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

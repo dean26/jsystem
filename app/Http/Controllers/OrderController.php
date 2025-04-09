@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -63,5 +64,14 @@ class OrderController extends Controller
     {
         $order->delete();
         return redirect()->route('orders.index')->with('success', 'Order deleted successfully.');
+    }
+
+    public function download(Order $order)
+    {
+        if(!$order->file || !Storage::disk('public')->exists($order->file)){
+            abort(404);
+        }
+
+        return Storage::disk('public')->download($order->file);
     }
 }
